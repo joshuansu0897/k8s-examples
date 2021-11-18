@@ -1,0 +1,24 @@
+# creando un deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-test
+  labels:
+    app: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+---
+# este tipo de service crea un load balancer en clouds, crea LBs externos, y como K8S no tiene LB de manera natura, no podemos hacer na
